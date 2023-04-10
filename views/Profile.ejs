@@ -1,0 +1,121 @@
+<html>
+    <head>
+        <title>BOOKBOOKEVERYWHERE</title>
+        <link rel="stylesheet" href="css/CSS file.css">
+    </head>
+    <body class="bodybg">
+        <div>
+            <div style="display: flex; flex-direction: row">
+                <div class="heading">
+                    <div class="headertxt" style="margin-bottom: 30pt;" id="logo" data-href="/main">
+                        <img src="img/Logo.png" style="width: 100pt;">
+                    </div>
+                    <div class="heading2">
+                        <a class="subheadertxt" id="navbar" href="/main">Book</a>
+                        <a class="subheadertxt" id="navbar" href="/store">Store</a>
+                        <a class="subheadertxt" id="navbar" href="/cart">Order</a>
+                        <a class="subheadertxt" id="navbar" href="/aboutus">About Us</a>
+                        <a class="subheadertxt" id="navbar" href="/profile"><u>Profile</u></a>
+                        <a class="subheadertxt" id="navbar" style="width: 120pt; position: fixed; bottom:50px;" href="/logout">Log Out</a>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-left:145pt">
+                <div class="headertxt">
+                    <b>Profile</b>
+                </div>
+                <div class="backgroundbox1" style="height: 91%">
+                    <div class="column">
+                        <div>
+                            <div class="basictxt">
+                                <b>Username : </b>
+                                <div>
+                                    <input type="text" id="profileuname" class="basictxt" value="Username" readonly>
+                                </div>
+                            </div>
+                            <div class="basictxt">
+                                <b>Name : </b>
+                                <div>
+                                    <input type="text" id="profilename" class="basictxt" value="Name" readonly>
+                                </div>
+                            </div>
+                            <div class="basictxt">
+                                <b>Phone Number : </b>
+                                <div>
+                                    <input type="tel" id="profilephone" class="basictxt" value="Phonenumber" readonly>
+                                </div>
+                            </div>
+                            <div class="basictxt">
+                                <b>Balance : </b>
+                                <div class="basictxt" id="balance">
+                                    &nbsp Rp 0
+                                </div>
+                            </div>
+                            <br>
+                            <div class="subheadertxt" style="margin: 15pt;"><b>Advanced</b></div>
+                            <div id="topupsession">
+                                <div class="basictxt"><b>Top Up</b></div>
+                                <input type="number" class="inputbox" id="topupval" placeholder="Top Up Amount" value="10000" min="10000" max="1000000">
+                                
+                                <input type="button" id="topupbtn" class="button" value="Top Up"> 
+                            </div>
+                            <input type="password" class="inputbox" id="vercode" placeholder="Verification Code">
+                            <div>
+                                <input type="button" class="button" id="signadmin" value="Sign As Admin">  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        jQuery(document).ready(function($){
+            var isAdmin = false;
+            $.post('/getprofile', {  }, function(data){
+                data = data[0];
+                $("#profileuname").val(data.username);
+                $("#profilename").val(data.nama);
+                $("#profilephone").val(data.no_hp);
+                $("#balance").html("&nbsp Rp " + data.saldo);
+                isAdmin = data.admin;
+            })
+            
+            $("#topupbtn").click(function(){
+                var amount = $('#topupval').val();
+                var verif = $('#vercode').val();
+                $.post('/verify', { pass:verif }, function(data){
+                    if(data == 'done'){
+                        $.post('/topup', { amount:amount }, function(data){
+                            if(data === 'done'){
+                                alert("Top Up Saldo Sukses!");
+                                window.location.href = '/profile';
+                            } else {
+                                alert("Top Up Saldo Gagal!");
+                            }
+                        })
+                    } else {
+                        alert("Top Up Failed, Ask Admin For Help");
+                    }
+                })
+            })
+            $("#signadmin").click(function(){
+                var verif = $('#vercode').val();
+                $.post('/verify', { pass:verif }, function(data){
+                    if(data == 'done' || isAdmin){
+                        $.post('/addadmin', {  }, function(data){
+                            if(data === 'done'){
+                                window.location.href = '/admin';
+                            } else {
+                                alert("Something went wrong!");
+                            }
+                        })
+                    } else {
+                        alert("Admin Access Only!");
+                    }
+                })
+            })
+        })
+    </script>
+</html>

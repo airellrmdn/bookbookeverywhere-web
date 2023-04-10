@@ -1,0 +1,211 @@
+<html>
+    <head>
+        <title>BOOKBOOKEVERYWHERE</title>
+        <link rel="stylesheet" href="css/CSS file.css">
+    </head>
+    <body class="bodybg">
+        <div>
+            <div style="display: flex; flex-direction: row">
+                <div class="heading">
+                    <div class="headertxt" style="margin-bottom: 30pt;" id="logo" data-href="/main">
+                        <img src="img/Logo.png" style="width: 100pt;">
+                    </div>
+                    <div class="heading2">
+                        <a class="subheadertxt" id="navbar" href="/main">Book</a>
+                        <a class="subheadertxt" id="navbar" href="/store">Store</a>
+                        <a class="subheadertxt" id="navbar" href="/cart">Order</a>
+                        <a class="subheadertxt" id="navbar" href="/aboutus">About Us</a>
+                        <a class="subheadertxt" id="navbar" href="/profile">Profile</a>
+                        <a class="subheadertxt" id="navbar" href="/admin"><u>Admin</u></a>
+                        <a class="subheadertxt" id="navbar" style="width: 120pt; position: fixed; bottom:50px;" href="/logout">Log Out</a>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-left:145pt">
+                <div class="headertxt">
+                    <b>Admin : Update Book</b>
+                </div>
+                <div class="backgroundbox1" style="height: 120%">
+                    <div class="basictxt">
+                        ISBN: 
+                    </div>
+                    <div>
+                        <input type="number" class="inputbox1" id="ubisbn" placeholder="123456789">
+                        <input type="button" class="button" id="findbook" value="Find">
+                    </div>
+                    <div class="basictxt">
+                        Book Title: 
+                    </div>
+                    <div>
+                        <input type="text" class="inputbox1" id="ubtitle" placeholder="Book Title">
+                    </div>
+                    <div class="basictxt">
+                        Category: 
+                    </div>
+                    <div>
+                        <form>
+                            <select name="choose_category" class="basictxt" id="ubcategory">
+                                <option value="Agama">Agama</option>
+                                <option value="Pendidikan">Pendidikan</option>
+                                <option value="Bisnis dan Ekonomi">Bisnis dan Ekonomi</option>
+                                <option value="Pengembangan Diri">Pengembangan Diri</option>
+                                <option value="Ilmu Sosial">Ilmu Sosial</option>
+                                <option value="Hukum">Hukum</option>
+                                <option value="Komputer dan Teknologi">Komputer dan Teknologi</option>
+                                <option value="Keluarga">Keluarga</option>
+                                <option value="Gaya Hidup">Gaya Hidup</option>
+                                <option value="Sastra dan Fiksi">Sastra dan Fiksi</option>
+                                <option value="Komik">Komik</option>
+                            </select>
+                        </form>
+                    </div>
+                    <div class="basictxt">
+                        Author: 
+                    </div>
+                    <div>
+                        <input type="text" class="inputbox1" id="ubauthor" placeholder="Author">
+                    </div>
+                    <div class="basictxt">
+                        Publisher: 
+                    </div>
+                    <div>
+                        <input type="text" class="inputbox1" id="ubpublisher" placeholder="Publisher">
+                    </div>
+                    <div class="basictxt">
+                        Publication Date: (MM/DD/YYYY)
+                    </div>
+                    <div>
+                        <input type="date" class="inputbox1" id="ubpublishdate" placeholder="Publisher">
+                    </div>
+                    <div class="basictxt">
+                        Page Count: 
+                    </div>
+                    <div>
+                        <input type="number" class="inputbox1" id="ubpage" placeholder="120">
+                    </div>
+                    <div class="basictxt">
+                        Stock: 
+                    </div>
+                    <div>
+                        <input type="number" class="inputbox1" id="ubstock" placeholder="120">
+                    </div>
+                    <div class="basictxt">
+                        Price: 
+                    </div>
+                    <div>
+                        <input type="number" class="inputbox1" id="ubprice" placeholder="100000">
+                    </div>
+                    <div class="basictxt">
+                        Availability: 
+                    </div>
+                    <div>
+                        <form>
+                            <select class="basictxt" id="ubavailability">
+                                <option value="Available">Available</option>
+                                <option value="Pre-Order">Pre-Order</option>
+                            </select>
+                        </form>
+                    </div>
+                    <div class="basictxt">
+                        Description: 
+                    </div>
+                    <div>
+                        <input type="text" class="inputbox1" id="ubdesc" placeholder="Description">
+                    </div>
+                    <div class="row">
+                        <div>
+                            <input type="button" class="button" id="nbsubmits" value="Add Book">  
+                        </div>
+                        <div>
+                            <input type="button" class="button" id="ubsubmits" value="Update Book">  
+                        </div>
+                        <div>
+                            <input type="button" class="button" id="dbsubmits" value="Delete Book">  
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        jQuery(document).ready(function($) {
+            var title, isbn, cat, author, publisher, page, stock, availability, desc, pdate, price;
+            $('#findbook').click(function(){
+                isbn = $('#ubisbn').val();
+                $.post('/getbook', { isbn:isbn }, function(data){
+                    data = data[0];
+                    if(data.judul === null || data.judul === ""){
+                        window.alert("Book Not Found");
+                    } else {
+                        title = $('#ubtitle').val(data.judul);
+                        cat = $('#ubcategory').val(data.kategori);
+                        author = $('#ubauthor').val(data.penulis);
+                        publisher = $('#ubpublisher').val(data.penerbit);
+                        pdate = $('#ubpublishdate').val(data.tanggal_terbit.slice(0,10));
+                        page = $('#ubpage').val(data.jumlah_halaman);
+                        stock = $('#ubstock').val(data.stok);
+                        price = $('#ubprice').val(data.harga);
+                        availability = $('#ubavailability').val(data.available ? "Available" : "Pre-Order");
+                        desc = $('#ubdesc').val(data.deskripsi);
+                    }
+                })
+            })
+            //updatebook
+            $('#ubsubmits').click(function() {
+                title = $('#ubtitle').val();
+                isbn = $('#ubisbn').val();
+                cat = $('#ubcategory').val();
+                author = $('#ubauthor').val();
+                publisher = $('#ubpublisher').val();
+                page = $('#ubpage').val();
+                stock = $('#ubstock').val();
+                pdate = $('#ubpublishdate').val();
+                price = $('#ubprice').val();
+                availability = $('#ubavailability').val() === "Available" ? true : false;
+                desc = $('#ubdesc').val();
+                $.post('/updatebook', { title:title, isbn:isbn, cat:cat, author:author, publisher:publisher, price:price, page:page, stock:stock, availability:availability, desc:desc, pdate:pdate }, function(data) {
+                    if (data === 'done') {
+                        window.alert('Book Updated');
+                        window.location.href = '/admin';
+                    } else {
+                        window.alert('Invalid Input');
+                    }
+                });
+            });
+            //newbook
+            $('#nbsubmits').click(function() {
+                title = $('#ubtitle').val();
+                isbn = $('#ubisbn').val();
+                cat = $('#ubcategory').val();
+                author = $('#ubauthor').val();
+                publisher = $('#ubpublisher').val();
+                pdate = $('#ubpublishdate').val();
+                page = $('#ubpage').val();
+                stock = $('#ubstock').val();
+                price = $('#ubprice').val();
+                availability = $('#ubavailability').val() === "Available" ? true : false;
+                desc = $('#ubdesc').val();
+                $.post('/newbook', { title:title, isbn:isbn, cat:cat, author:author, publisher:publisher, price:price, page:page, stock:stock, availability:availability, desc:desc, pdate:pdate }, function(data) {
+                    if (data === 'done') {
+                        window.alert('New Book Registered');
+                        window.location.href = '/admin';
+                    } else {
+                        window.alert('Invalid Input');
+                    }
+                });
+            });
+            $('#dbsubmits').click(function(){
+                isbn = $('#ubisbn').val();
+                $.post('/deletebook', { isbn:isbn }, function(data){
+                    if (data === 'done'){
+                        window.alert('Book Deleted');
+                        window.location.href = '/admin';
+                    } else {
+                        window.alert('Invalid ISBN');
+                    }
+                })
+            })
+        });
+    </script>
+</html>

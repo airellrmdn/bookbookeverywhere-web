@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <title>BOOKBOOKEVERYWHERE</title>
+        <link rel="stylesheet" href="css/CSS file.css">
+    </head>
+    <body class="bodybg">
+        <div>
+            <div style="display: flex; flex-direction: row">
+                <div class="heading">
+                    <div class="headertxt" style="margin-bottom: 30pt;" id="logo" data-href="/main">
+                        <img src="img/Logo.png" style="width: 100pt;">
+                    </div>
+                    <div class="heading2">
+                        <a class="subheadertxt" id="navbar" href="/main">Book</a>
+                        <a class="subheadertxt" id="navbar" href="/store"><u>Store</u></a>
+                        <a class="subheadertxt" id="navbar" href="/cart">Order</a>
+                        <a class="subheadertxt" id="navbar" href="/aboutus">About Us</a>
+                        <a class="subheadertxt" id="navbar" href="/profile">Profile</a>
+                        <a class="subheadertxt" id="navbar" style="width: 120pt; position: fixed; bottom:50px;" href="/logout">Log Out</a>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-left:145pt">
+                <div class="headertxt">
+                    <b>Store</b>
+                </div>
+                <div class="backgroundbox1">
+                    
+                    <div class="column" id="store_table">
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        jQuery(document).ready(function($){
+            $.post('/getstore', {  }, function(data) {
+                var html = '<div class="row">';
+                for(i = 0; i < data.length; i++){
+                    if(i%3 == 0 && i > 0){
+                        html += `</div><div class="row">`
+                    }
+                    html += `<div class="objectbook">
+                                <div class="titletxt">
+                                    <u><b>` + data[i].nama_toko + `</b></u> <br />
+                                </div>
+                                <div class="hargatxt">
+                                    <b> ` + data[i].nomor_telepon + `</b>
+                                </div>
+                                <div class="hargatxt">
+                                    <b> ` + (data[i].jam_buka).slice(0, 5) + ` to ` + (data[i].jam_tutup).slice(0, 5) + `</b>
+                                </div>
+                                <div id="desc" class="desctxt">
+                                    ` + data[i].alamat + `<br>
+                                </div>
+                            </div>`
+                }
+                html += `</div>`
+                $("#store_table").html(html);
+            });
+        })
+    </script>
+</html>

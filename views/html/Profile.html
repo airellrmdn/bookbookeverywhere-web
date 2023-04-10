@@ -1,0 +1,78 @@
+<html>
+    <head>
+        <title>BOOKBOOKEVERYWHERE</title>
+        <link rel="stylesheet" href="css/CSS file.css">
+    </head>
+    <body class="bodybg">
+        <div>
+            <div style="display: flex; flex-direction: row">
+                <div class="heading">
+                    <div class="headertxt" style="margin-bottom: 30pt;">
+                        <img src="img/Logo.jpg" style="width: 100pt;">
+                    </div>
+                    <div class="heading2">
+                        <a class="subheadertxt" id="navbar" href="Bookpage.html">Book</a>
+                        <a class="subheadertxt" id="navbar" href="Store.html">Store</a>
+                        <a class="subheadertxt" id="navbar" href="Aboutus.html">About Us</a>
+                        <a class="subheadertxt" id="navbar" href="Profile.html">Profile</a>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-left:145pt">
+                <div class="headertxt">
+                    <b>Profile</b>
+                </div>
+                <div class="backgroundbox1" style="height: 91%">
+                    <div class="column">
+                        <div>
+                            <div class="basictxt">
+                                <b>Username : </b>
+                                <div>
+                                    <input type="text" class="basictxt" value="Windiarta" readonly>
+                                </div>
+                            </div>
+                            <div class="basictxt">
+                                <b>Name : </b>
+                                <div>
+                                    <input type="text" class="basictxt" value="Windiarta" readonly>
+                                </div>
+                            </div>
+                            <div class="basictxt">
+                                <b>Phone Number : </b>
+                                <div>
+                                    <input type="tel" class="basictxt" value="08123456789" readonly>
+                                </div>
+                            </div>
+                            <div class="basictxt">
+                                <b>Balance : </b>
+                                <div class="basictxt">
+                                    <!-- &nbsp itu sama seperti \t -->
+                                    &nbsp Rp 100000
+                                </div>
+                            </div>
+                            <br>
+                            <div>
+                                <input type="button" class="button" value="Top Up">  
+                            </div>
+                            <div>
+                                <input type="button" class="button" value="Edit Profile">  
+                            </div>
+                            <div>
+                                <input type="button" class="button" value="Admin Registration">  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        jQuery(document).ready(function($){
+            $("#book").click(function(){window.location=$(this).data("href");})
+            $("#store").click(function(){window.location=$(this).data("href");})
+            $("#aboutus").click(function(){window.location=$(this).data("href");})
+            $("#profile").click(function(){window.location=$(this).data("href");})
+        })
+    </script>
+</html>

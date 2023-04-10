@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <title>BOOKBOOKEVERYWHERE</title>
+        <link rel="stylesheet" href="css/CSS file.css">
+    </head>
+
+    <body class="bodybg">
+        <div>
+            <div class="head">
+                <a href="localhost:4000" title="Home">
+                    <img src="img/Header.png" alt="BOOKBOOKEVERYWHERE">
+                </a>
+            </div>
+            <div class="backgroundbox" style="display:flex">
+                <div class="loginbox" id="register">
+                    <div class="subheadertxt">
+                        <b>Register</b>
+                    </div>
+                    <div class="basictxt">
+                        Name: 
+                    </div>
+                    <div>
+                        <input type="text" class="inputbox" id="names" placeholder="nama">
+                    </div>
+                    <div class="basictxt">
+                        Phone Number: 
+                    </div>
+                    <div>
+                        <input type="tel" class="inputbox" id="phones" placeholder="08xxxxxxxx">
+                    </div>
+                    <div class="basictxt">
+                        Username: 
+                    </div>
+                    <div>
+                        <input type="text" class="inputbox" id="usernames" placeholder="username">
+                    </div>
+                    <div class="basictxt">
+                        Password: 
+                    </div>
+                    <div>
+                        <input type="password" class="inputbox" id="passwords" placeholder="password">
+                    </div>
+                    <div>
+                        <input type="button" class="button" id="submits" value="Register">  
+                    </div>
+                    <div class="subbasictxt">
+                        Already Have Account?
+                        <a href="/" class="link">Log In</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="subheadertxt" style="margin-top: 50px;">
+                        <b>BOOKBOOK EVERYWHERE</b>
+                    </div>
+                    <div class="basictxt">
+                        Description here
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            jQuery(document).ready(function($) {
+                var username, pass, name, phone;
+                $('#register').click(function() {
+                    username = $('#usernames').val();
+                    pass = $('#passwords').val();
+                    name = $('#names').val();
+                    phone = $('#phones').val();
+                    
+                    $.post('/register', { username: username, pass: pass, name: name, phone: phone }, function(data) {
+                        if (data === 'done') {
+                            window.location.href = '/admin';
+                            window.alert('Registrasi Sukses');
+                        }
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

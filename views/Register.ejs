@@ -1,0 +1,86 @@
+<html>
+    <head>
+        <title>BOOKBOOKEVERYWHERE</title>
+        <link rel="stylesheet" href="css/CSS file.css">
+    </head>
+
+    <body class="bodybg">
+        <div>
+            <div class="head">
+                <a href="/" title="Home">
+                    <img src="img/Header.png" alt="BOOKBOOKEVERYWHERE">
+                </a>
+            </div>
+            <div class="backgroundbox" style="display:flex">
+                <div class="loginbox" id="register">
+                    <div class="subheadertxt" style="text-align: center;">
+                        <b>Register</b>
+                    </div>
+                    <div class="basictxt">
+                        Name: 
+                    </div>
+                    <div>
+                        <input type="text" class="inputbox" id="names" placeholder="nama">
+                    </div>
+                    <div class="basictxt">
+                        Phone Number: 
+                    </div>
+                    <div>
+                        <input type="tel" class="inputbox" id="phones" placeholder="08xxxxxxxx">
+                    </div>
+                    <div class="basictxt">
+                        Username: 
+                    </div>
+                    <div>
+                        <input type="text" class="inputbox" id="usernames" placeholder="username">
+                    </div>
+                    <div class="basictxt">
+                        Password: 
+                    </div>
+                    <div>
+                        <input type="password" class="inputbox" id="passwords" placeholder="password">
+                    </div>
+                    <div>
+                        <input type="button" class="button" id="submits" value="Register">  
+                    </div>
+                    <div class="subbasictxt">
+                        Already Have Account?
+                        <a href="/" class="link">Log In</a>
+                    </div>
+                </div>
+                <div>
+                    <div class="subheadertxt" style="margin-top: 50px; text-align: center;">
+                        <b>BOOKBOOK EVERYWHERE</b>
+                    </div>
+                    <div class="basictxt" style="padding-right: 50pt; text-align: center;">
+                        Book Book Everywhere Description (Revision) :
+                        Toko Buku Online Book Book Everywhere menyediakan aneka buku berkualitas dan terlengkap. Nikmati promo buku murah yang hanya anda dapatkan disini. Kenyamanan dan kepuasan para pelanggan merupakan prioritas kami. Kami ingin memberikan pengalaman yang lebih kepada para pelanggan di saat pelanggan melakukan proses pembelanjaan baik online maupun offline dengan terus mengembangkan fitur-fitur produk. Memberikan pelayanan yang terbaik menjadi tujuan kami dengan dukungan manajemen yang proaktif dan kreatif.
+                        Book Book Everywhere merupakan anak perusahaan Networl Laboratory Group of Computer Engineering Universitas Indonesia. Saat ini Book Book Everywhere telah memiliki 9 toko yang tersebar di seluruh Provinsi DKI Jakarta. Dan kami akan terus berupaya untuk dapat mengembangkan Book Book Everywhere dalam membantu kebutuhan sobat literasi Indonesia.     
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            jQuery(document).ready(function($) {
+                var username, pass, name, phone;
+                $('#submits').click(function() {
+                    username = $('#usernames').val();
+                    pass = $('#passwords').val();
+                    name = $('#names').val();
+                    phone = $('#phones').val();
+                    
+                    $.post('/register', { username: username, pass: pass, name: name, phone: phone }, function(data) {
+                        if (data === 'done') {
+                            window.location.href = '/main';
+                            window.alert('Registrasi Sukses');
+                        }
+                        else if (data === 'fail'){
+                            window.alert('Register Gagal');
+                        }
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,108 @@
+<html>
+    <head>
+        <title>BOOKBOOKEVERYWHERE</title>
+        <link rel="stylesheet" href="css/CSS file.css">
+    </head>
+    <body class="bodybg">
+        <div>
+            <div style="display: flex; flex-direction: row">
+                <div class="heading">
+                    <div class="headertxt" style="margin-bottom: 30pt;" id="logo" data-href="/main">
+                        <img src="img/Logo.png" style="width: 100pt;">
+                    </div>
+                    <div class="heading2">
+                        <a class="subheadertxt" id="navbar" href="/main"><u>Book</u></a>
+                        <a class="subheadertxt" id="navbar" href="/store">Store</a>
+                        <a class="subheadertxt" id="navbar" href="/cart">Order</a>
+                        <a class="subheadertxt" id="navbar" href="/aboutus">About Us</a>
+                        <a class="subheadertxt" id="navbar" href="/profile">Profile</a>
+                        <a class="subheadertxt" id="navbar" style="width: 120pt; position: fixed; bottom:50px;" href="/logout">Log Out</a>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-left:145pt">
+                <div class="backgroundbox1" style="height: max-content;">
+                    <div style="margin: 20px;">
+                        <div style="height: 20%;">
+                            <div class="headertxt" style="text-align: center;" id="booktitle"></div>
+                            <div class="basictxt" style="text-align: center;" id="bookid"></div>
+                        </div>
+                        <div class="subheadertxt">Deskripsi: <br/></div>
+                        <div class="basictxt" style="height: max-content; text-align: justify;" id="bookdesc"></div>
+                        <div class="subheadertxt">Details: <br/></div>
+                        <div id="bookdetails"></div>
+                        <div class="subheadertxt" id="bookprice">Harga: </div>
+                        <div class="row" id="inputamount" style="margin-top: 20px;">
+                            <input type="button" class="bigbutton" id="bookbuy" value="Buy Book">
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            jQuery(document).ready(function($) {
+                var query = window.location.search.substring(1);
+                var code = query.split("=");
+                var val = code[1];
+                $.post('/getbook', { isbn:val }, function(data){
+                    data = data[0];
+                    $('#booktitle').html(data.judul);
+                    $('#bookid').html(`ISBN : <a href="https://isbn.perpusnas.go.id/Account/SearchBuku?searchTxt=` + data.isbn + `&searchCat=ISBN" target="_blank">` + data.isbn + `</a>`); //data.ISBN
+                    $('#bookdesc').html(data.deskripsi ? data.deskripsi : "-");
+                    $('#bookprice').html("Harga : Rp " + data.harga);
+                    $('#inputamount').prepend(`<input type="number" style="text-align:center" id=bookamount value="` + (data.stok == 0 ? 0 : 1) + `" min="1" max="` + data.stok + `">`);
+                    
+                    $('#bookamount').change(function(){
+                        $('#bookprice').html("Harga : Rp " + data.harga * $('#bookamount').val());    
+                    })
+                    var html = `
+                    <table class="basictxt">
+                        <tr>
+                            <td>Kategori</td>
+                            <td>: ` + data.kategori + `</td>
+                        </tr>
+                        <tr>
+                            <td>Penulis</td>
+                            <td>: ` + data.penulis + ` </td>
+                        </tr>
+                        <tr>
+                            <td>Penerbit</td>
+                            <td>: ` + data.penerbit + `</td>
+                        </tr>
+                        <tr>
+                            <td>Tanggal Terbit</td>
+                            <td>: ` + (data.tanggal_terbit).slice(0, 10) + `</td>
+                        </tr>
+                        <tr>
+                            <td>Jumlah Halaman</td>
+                            <td>: ` + data.jumlah_halaman + `</td>
+                        </tr>
+                        <tr>
+                            <td>Stok</td>
+                            <td>: ` + data.stok + `</td>
+                        </tr>
+                        <tr>
+                            <td>Status</td>
+                            <td>: ` + (data.available ? "Available" : "Pre-Order") + `</td>
+                        </tr>
+                    </table>
+                    `
+                    $('#bookdetails').html(html);
+                });
+                $('#bookbuy').click(function(){
+                    amount = $('#bookamount').val();
+                    window.alert(val)
+                    $.post('/transaction', { amount:amount, isbn:val }, function(data){
+                        if(data === 'fail'){
+                            alert("Transaction Failed");
+                        } else {
+                            alert("Transaction Succeed");
+                        }
+                    })
+                })
+            });
+        </script>
+    </body>
+</html>

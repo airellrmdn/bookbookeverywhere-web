@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title>BOOKBOOKEVERYWHERE</title>
+        <link rel="stylesheet" href="css/CSS file.css">
+    </head>
+    <body class="bodybg">
+        <div>
+            <div style="display: flex; flex-direction: row">
+                <div class="heading">
+                    <div class="headertxt" style="margin-bottom: 30pt;">
+                        <img src="img/Logo.jpg" style="width: 100pt;">
+                    </div>
+                    <div class="heading2">
+                        <a class="subheadertxt" id="navbar" href="Bookpage.html">Book</a>
+                        <a class="subheadertxt" id="navbar" href="Store.html">Store</a>
+                        <a class="subheadertxt" id="navbar" href="Aboutus.html">About Us</a>
+                        <a class="subheadertxt" id="navbar" href="Profile.html">Profile</a>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-left:145pt">
+                <div class="headertxt">
+                    <b>About Us</b>
+                </div>
+                <div class="backgroundbox1" style="height: 91%">
+                    <div class="column">
+                        <div class="basictxt">
+                            BOOKBOOKEVERYWHERE adalah ...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        jQuery(document).ready(function($){
+            $("#book").click(function(){window.location=$(this).data("href");})
+            $("#store").click(function(){window.location=$(this).data("href");})
+            $("#aboutus").click(function(){window.location=$(this).data("href");})
+            $("#profile").click(function(){window.location=$(this).data("href");})
+        })
+    </script>
+</html>

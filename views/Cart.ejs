@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <title>BOOKBOOKEVERYWHERE</title>
+        <link rel="stylesheet" href="css/CSS file.css">
+    </head>
+    <body class="bodybg">
+        <div>
+            <div style="display: flex; flex-direction: row">
+                <div class="heading">
+                    <div class="headertxt" style="margin-bottom: 30pt;" id="logo" data-href="/main">
+                        <img src="img/Logo.png" style="width: 100pt;">
+                    </div>
+                    <div class="heading2">
+                        <a class="subheadertxt" id="navbar" href="/main">Book</a>
+                        <a class="subheadertxt" id="navbar" href="/store">Store</a>
+                        <a class="subheadertxt" id="navbar" href="/cart"><u>Order</u></a>
+                        <a class="subheadertxt" id="navbar" href="/aboutus">About Us</a>
+                        <a class="subheadertxt" id="navbar" href="/profile">Profile</a>
+                        <a class="subheadertxt" id="navbar" style="width: 120pt; position: fixed; bottom:50px;" href="/logout">Log Out</a>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-left:145pt">
+                <div class="headertxt">
+                    <b>Order</b>
+                </div>
+                <div class="backgroundbox1">
+                    <div class="column" id="cart_table" style="width: 97%;">
+                        <div class="subheadertxt">Your Order Is Empty :(</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        jQuery(document).ready(function($){
+            $.post('/getcart', {  }, function(data){
+                var html = '';
+                for(i = 0; i < data.length; i++){
+                    html += `
+                        <div class="cartbox">
+                            <div class="carttitletxt">
+                                <u><b>` + data[i].judul + ` </b></u> <br />
+                            </div>
+                            <div class="carttxt">
+                                ID Transaksi: ` + data[i].id_transaksi + `
+                            </div>
+                            <div class="carttxt">
+                                Count: ` + data[i].jumlah + `
+                            </div>
+                            <div class="carttxt">
+                                Transaction Date: ` + data[i].tanggal_transaksi.slice(0,10) + `
+                            </div>
+                            <div class="carttxt">
+                                PickUp Date: ` + data[i].tanggal_pengambilan.slice(0,10) + `
+                            </div>
+                        </div>
+                    `
+                }
+                $('#cart_table').html(html);
+            })
+        })
+    </script>
+</html>

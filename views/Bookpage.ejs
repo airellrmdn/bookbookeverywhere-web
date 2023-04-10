@@ -1,0 +1,113 @@
+<html>
+    <head>
+        <title>BOOKBOOKEVERYWHERE</title>
+        <link rel="stylesheet" href="css/CSS file.css">
+    </head>
+    <body class="bodybg">
+        <div>
+            <div style="display: flex; flex-direction: row">
+                <div class="heading">
+                    <div class="headertxt" style="margin-bottom: 30pt;" id="logo" data-href="/main">
+                        <img src="img/Logo.png" style="width: 100pt;">
+                    </div>
+                    <div class="heading2">
+                        <a class="subheadertxt" id="navbar" href="/main"><u>Book</u></a>
+                        <a class="subheadertxt" id="navbar" href="/store">Store</a>
+                        <a class="subheadertxt" id="navbar" href="/cart">Order</a>
+                        <a class="subheadertxt" id="navbar" href="/aboutus">About Us</a>
+                        <a class="subheadertxt" id="navbar" href="/profile">Profile</a>
+                        <a class="subheadertxt" id="navbar" style="position: fixed; bottom:50px; width: 120pt;" href="/logout">Log Out</a>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-left:145pt">
+                <div class="headertxt">
+                    <b>Book</b>
+                </div>
+                <div class="backgroundbox1" style="height: 1000000%;">
+                    <div class="categories">
+                        <form>
+                            <label for="choose_category" class="basictxt">Category: </label>
+                            <select name="choose_category" class="basictxt" id="category_select">
+                                <option value="All">All</option>
+                                <option value="Agama">Agama</option>
+                                <option value="Pendidikan">Pendidikan</option>
+                                <option value="Bisnis dan Ekonomi">Bisnis & Ekonomi</option>
+                                <option value="Pengembangan Diri">Pengembangan Diri</option>
+                                <option value="Ilmu Sosial">Ilmu Sosial</option>
+                                <option value="Hukum">Hukum</option>
+                                <option value="Komputer dan Teknologi">Komputer & Teknologi</option>
+                                <option value="Keluarga">Keluarga</option>
+                                <option value="Gaya Hidup">Gaya Hidup</option>
+                                <option value="Sastra dan Fiksi">Sastra & Fiksi</option>
+                                <option value="Komik">Komik</option>
+                            </select>
+                            <input type="button" value="Submit" id="category_submit" class="basictxt" style="width: 80px; text-align:center; border-radius: 3pt;">
+                        </form>
+                    </div>
+                    <div class="column" id="book_table">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script>
+            jQuery(document).ready(function($) {
+                $('#category_submit').click(function() {
+                    var slc = document.getElementById("category_select");
+                    var cat = slc.value;
+                    $.post('/getdata', { category:cat }, function(data) {
+                        console.log(data);
+                        var html = '<div class="row">';
+                        for(i = 0; i < data.length; i++){
+                            if(i%3 == 0 && i > 0){
+                                html += `</div><div class="row">`
+                            }
+                            html += `<div class="objectbook" id="${data[i].isbn}">
+                                <a id="navbar" href="/Bookdetail?isbn=${data[i].isbn}">
+                                    <div class="titletxt">
+                                        <u><b>` + data[i].judul + `</b></u> <br />
+                                    </div>
+                                    <div class="hargatxt">
+                                        <b> RP ` + data[i].harga + `</b>
+                                    </div>
+                                    <div id="desc" class="desctxt">
+                                        Author: ` + data[i].penulis + `<br>
+                                        Stok Produk: ` + data[i].stok + `<br>
+                                    </div>
+                                </a>
+                            </div>`
+                        }
+                        html += `</div>`
+                        $("#book_table").html(html);
+                    });
+                });
+            });
+            $.post('/getdata', { category:"All" }, function(data) {
+                var html = '<div class="row">';
+                for(i = 0; i < data.length; i++){
+                    if(i%3 == 0 && i > 0){
+                        html += `</div><div class="row">`
+                    }
+                    html += `<div class="objectbook" id="${data[i].isbn}">
+                                <a id="navbar1" href="/Bookdetail?isbn=${data[i].isbn}">
+                                    <div class="titletxt">
+                                        <u><b>` + data[i].judul + `</b></u> <br />
+                                    </div>
+                                    <div class="hargatxt">
+                                        <b> RP ` + data[i].harga + `</b>
+                                    </div>
+                                    <div id="desc" class="desctxt">
+                                        Author: ` + data[i].penulis + `<br>
+                                        Stok Produk: ` + data[i].stok + `<br>
+                                    </div>
+                                </a>
+                            </div>`
+                        }
+                html += `</div>`
+                $("#book_table").html(html);
+            });
+        </script>
+    </body>
+</html>

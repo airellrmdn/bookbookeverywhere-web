@@ -1,0 +1,214 @@
+body{background-color: #a45c40;}
+
+.bodybg{
+    background-color: #e4b7a0;
+}
+.bodybg2{
+    background-color: #f6eee0; 
+}
+.head{
+    text-align: center;
+    margin-bottom: 20pt;
+}
+.heading{
+    position: fixed; 
+    background-color: #a45c40; 
+    width: 120pt; 
+    height: 96%;
+    padding: 10pt;
+    padding-top: 0pt;
+}
+.categories{
+    width: 100%;
+    background-color: #c38370;
+    padding-bottom: 10px;
+}
+.heading2{
+    width: 100%; 
+    justify-content: end;
+    margin-right: 15pt;
+}
+.backgroundbox{
+    background-color: #f6eee0; 
+    border: 3px solid #a45c40;
+    border-radius: 3pt;
+    margin: 50px;
+}
+.backgroundbox1{
+    background-color: #f6eee0; 
+    border: 1px solid #a45c40;
+    height: 200%;
+}
+.loginbox{
+    background-color: #f6eee0; 
+    border: 1px solid #a45c40;
+    width: 400px;
+    align-items: center ;
+    margin: 50px;
+    padding: 20pt;
+    padding-bottom: 30pt;
+}
+.headertxt{
+    font-size: 35pt;
+    color: black;
+    font-family: 'Open Sans';
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.subheadertxt{
+    font-size: 25pt;
+    color: black;
+    font-family: 'Open Sans';
+    margin-left: 0;
+    margin-top: 20px;
+}
+.basictxt{
+    font-size: 15pt;
+    color: black;
+    font-family: 'Open Sans';
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.subbasictxt{
+    text-align:center; 
+    margin-top: 5px; 
+    font-family: 'Open Sans';
+}
+.link{
+    color: blue;
+}
+.inputbox{
+    width: 250pt;
+    height: 25pt;
+    margin-top: 5px;
+    margin-left: 20px;
+    font-size: 13pt;
+}
+.inputbox1{
+    width: 70%;
+    height: 25pt;
+    margin-top: 5px;
+    margin-left: 20px;
+    font-size: 13pt;
+}
+.button{
+    width: 250pt;
+    height: 25pt;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 13pt;
+    font-family: 'Open Sans';
+    background-color: #c38370;
+    color: white;
+    border: 2px solid #a45c40;
+}
+.bigbutton{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: 20pt;
+    font-family: 'Open Sans';
+    background-color: #c38370;
+    color: white;
+    border: 2px solid #a45c40;
+}
+.objectbook{
+    border: #a45c40 solid 2px;
+    border-radius: 5px;
+    width: 30%;
+    height: 200pt;
+    margin: 10px;
+    padding: 10px;
+}
+.cartbox{
+    border: #a45c40 solid 2px;
+    border-radius: 5px;
+    width: 100%;
+    height: max-content;
+    margin: 10px;
+    padding: 10px;
+}
+.adminopt{
+    border: #a45c40 solid 2px;
+    border-radius: 5px;
+    width: 50%;
+    height: 100px;
+    margin: 10px;
+    padding-top: 60px;
+    text-align: center;
+}
+.row{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: max-content;
+}
+.column{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+.titletxt{
+    font-size: 25px;
+    color: black;
+    font-family: 'Open Sans';
+    margin-bottom: 2px;
+}
+.desctxt{
+    font-size: 15px;
+    color: black;
+    font-family: 'Open Sans';
+    margin-bottom: 5px;
+}
+.hargatxt{
+    font-size: 20px;
+    color: black;
+    font-family: 'Open Sans';
+    margin-bottom: 15px;
+}
+.carttitletxt{
+    font-size: 25px;
+    color: black;
+    font-family: 'Open Sans';
+    margin-bottom: 10px;
+}
+.carttxt{
+    font-size: 20px;
+    color: black;
+    font-family: 'Open Sans';
+}
+#navbar {
+    display: block;
+    color: #000;
+    text-decoration: none;
+    width: 100%;
+}
+#navbar1 {
+display: block;
+color: #000;
+text-decoration: none;
+width: 100%;
+}
+
+#navbar:hover {
+    background-color: #f6eee0;
+    color: black;
+}
+#navbar1:hover {
+background-color: #f6eee0;
+color: black;
+}
+.button:hover{
+    background-color: #e4b7a0;
+}
+.bigbutton:hover{
+    background-color: #e4b7a0;
+}
+.adminopt:hover{
+    background-color: #e4b7a0;
+}

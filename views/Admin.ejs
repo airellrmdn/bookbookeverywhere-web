@@ -1,0 +1,69 @@
+<html>
+    <head>
+        <title>BOOKBOOKEVERYWHERE</title>
+        <link rel="stylesheet" href="css/CSS file.css">
+    </head>
+    <body class="bodybg">
+        <div>
+            <div style="display: flex; flex-direction: row">
+                <div class="heading">
+                    <div class="headertxt" style="margin-bottom: 30pt;" id="logo" data-href="/main">
+                        <img src="img/Logo.png" style="width: 100pt;">
+                    </div>
+                    <div class="heading2">
+                        <a class="subheadertxt" id="navbar" href="/main">Book</a>
+                        <a class="subheadertxt" id="navbar" href="/store">Store</a>
+                        <a class="subheadertxt" id="navbar" href="/cart">Order</a>
+                        <a class="subheadertxt" id="navbar" href="/aboutus">About Us</a>
+                        <a class="subheadertxt" id="navbar" href="/profile">Profile</a>
+                        <a class="subheadertxt" id="navbar" href="/admin"><u>Admin</u></a>
+                        <a class="subheadertxt" id="navbar" style="width: 120pt; position: fixed; bottom:50px;" href="/logout">Log Out</a>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-left:145pt">
+                <div class="headertxt">
+                    <b>Admin</b>
+                </div>
+                <div class="backgroundbox1" style="height: 91%">
+                    <div class="row">
+                        <div class="adminopt" id="update">
+                            <div class="carttitletxt">
+                                <b>Update Existing Book</b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="adminopt" id="editstore">
+                            <div class="carttitletxt">
+                                <b>Edit Store Information</b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="adminopt" id="manage">
+                            <div class="carttitletxt">
+                                <b>Manage Order</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        var secretcode = "HelloWorld!";
+        jQuery(document).ready(function($){
+            $('#editstore').click(function(){
+                window.location.href = '/editstore';
+            })
+            $('#update').click(function(){
+                window.location.href = '/updatebook';
+            })
+            $('#manage').click(function(){
+                window.location.href = '/manageorder';
+            })
+        })
+    </script>
+</html>
